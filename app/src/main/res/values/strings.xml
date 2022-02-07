@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">CoppelMVVVM</string>
+    <string name="tittle_biography">tittle_biography</string>
+    <string name="label_full_name">Full name:</string>
+    <string name="label_alter_egos">Alter egos:</string>
+    <string name="label_aliases">Aliases:</string>
+    <string name="label_place_of_birth">Place of birth:</string>
+    <string name="label_first_appearance">First appearance:</string>
+    <string name="label_publisher">Publisher:</string>
+    <string name="tittle_work">tittle_work</string>
+    <string name="label_occupation">Occupation:</string>
+    <string name="label_base">Base:</string>
+    <string name="tittle_connection">tittle_connection</string>
+    <string name="label_group_affiliation">Group Affiliation:</string>
+    <string name="label_relatives">Relatives:</string>
+
+    <string name="intelligence">Intelligence</string>
+    <string name="strength">Strength</string>
+    <string name="speed">Speed</string>
+    <string name="durability">Durability</string>
+    <string name="power">Power</string>
+    <string name="combat">Combat</string>
+    <string name="label_gender">Gender:</string>
+    <string name="label_racer">Racer:</string>
+    <string name="label_eye_color">Eye color:</string>
+    <string name="label_hair_color">Hair color:</string>
+    <string name="label_height">Height:</string>
+    <string name="label_alignment">Alignment:</string>
+</resources>
