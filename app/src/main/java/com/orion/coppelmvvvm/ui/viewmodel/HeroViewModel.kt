@@ -28,36 +28,42 @@ class HeroViewModel @Inject constructor(
 
 
         viewModelScope.launch {
-            var result:MutableList<Hero> = arrayListOf()
-            isLoading.postValue(true)
-            if (isNetworkAvailable.value == true) {
-             result = getHerosUseCase()
-            }
-            if (!result.isNullOrEmpty()){
-                heroModelLst.postValue(result)
+            if(heroModelLst.value?.size == 0 || heroModelLst.value.isNullOrEmpty() ){
+                var result:MutableList<Hero> = arrayListOf()
+                isLoading.postValue(true)
+                if (isNetworkAvailable.value == true) {
+                    result = getHerosUseCase()
+                }
+                if (!result.isNullOrEmpty()){
+                    heroModelLst.postValue(result)
 
-            }else{
-                heroModelLst.postValue(arrayListOf())
+                }else{
+                    heroModelLst.postValue(arrayListOf())
+                }
+                isLoading.postValue(false)
             }
-            isLoading.postValue(false)
+
         }
     }
 
 
     fun onAllCreate(){
-        viewModelScope.launch {
-            var result:MutableList<Hero> = arrayListOf()
-            //isLoading.postValue(true)
-            if (isNetworkAvailable.value == true) {
-                result = getHeroesUseCase()
-            }
-            if (!result.isNullOrEmpty()){
-                heroModelLst.postValue(result)
 
-            }else{
-                heroModelLst.postValue(arrayListOf())
+            viewModelScope.launch {
+                if(heroModelLst.value?.size == 0 || heroModelLst.value.isNullOrEmpty() ) {
+                var result: MutableList<Hero> = arrayListOf()
+                //isLoading.postValue(true)
+                if (isNetworkAvailable.value == true) {
+                    result = getHeroesUseCase()
+                }
+                if (!result.isNullOrEmpty()) {
+                    heroModelLst.postValue(result)
+
+                } else {
+                    heroModelLst.postValue(arrayListOf())
+                }
+                //isLoading.postValue(false)
             }
-            //isLoading.postValue(false)
         }
 
     }

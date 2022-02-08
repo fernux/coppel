@@ -14,11 +14,9 @@ import com.orion.coppelmvvvm.domain.model.DetailHero
 import com.orion.coppelmvvvm.ui.isConnected
 import com.orion.coppelmvvvm.ui.viewmodel.DetailHeroViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
+@ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class DetailHeroFragment :Fragment(R.layout.fragment_detail_hero) {
     private var _binding: FragmentDetailHeroBinding? = null
@@ -133,6 +131,7 @@ class DetailHeroFragment :Fragment(R.layout.fragment_detail_hero) {
     override fun onDestroy() {
         super.onDestroy()
         scope.cancel()
+        _binding = null
     }
 
 

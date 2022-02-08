@@ -21,8 +21,9 @@ import com.orion.coppelmvvvm.ui.ConnectionLiveData
 import com.orion.coppelmvvvm.ui.adapter.HeroAdapter
 import com.orion.coppelmvvvm.ui.viewmodel.HeroViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-
+@ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class HeroesFragment :Fragment(R.layout.fragment_heroes){
     private var _binding: FragmentHeroesBinding? = null
@@ -49,6 +50,8 @@ class HeroesFragment :Fragment(R.layout.fragment_heroes){
         // Retrieve and inflate the layout for this fragment
         _binding = FragmentHeroesBinding.inflate(inflater, container, false)
         val view = binding.root
+
+
         return view
     }
 
@@ -66,7 +69,7 @@ class HeroesFragment :Fragment(R.layout.fragment_heroes){
         heroViewModel.isNetworkAvailable.value = isConnected
         heroViewModel.onCreate()
         heroViewModel.onAllCreate()
-
+        binding.rvSuperHero.layoutManager = GridLayoutManager(this.requireContext(),2)
 
         heroViewModel.heroModelLst.observe( viewLifecycleOwner, Observer { currentHero ->
             //heroList = currentHero
@@ -85,7 +88,7 @@ class HeroesFragment :Fragment(R.layout.fragment_heroes){
     }
     fun initRecyclerView(){
 
-        binding.rvSuperHero.layoutManager = GridLayoutManager(this.requireContext(),2)
+
         binding.rvSuperHero.adapter =
             HeroAdapter(heroViewModel.heroModelLst){
                 onItemSelected(
