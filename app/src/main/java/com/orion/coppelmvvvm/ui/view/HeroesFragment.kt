@@ -14,6 +14,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.orion.coppelmvvvm.R
 import com.orion.coppelmvvvm.databinding.FragmentHeroesBinding
 import com.orion.coppelmvvvm.domain.model.Hero
@@ -70,7 +72,7 @@ class HeroesFragment :Fragment(R.layout.fragment_heroes){
         heroViewModel.onCreate()
         heroViewModel.onAllCreate()
         binding.rvSuperHero.layoutManager = GridLayoutManager(this.requireContext(),2)
-
+        initScrollListener()
         heroViewModel.heroModelLst.observe( viewLifecycleOwner, Observer { currentHero ->
             //heroList = currentHero
             initRecyclerView()
@@ -96,7 +98,23 @@ class HeroesFragment :Fragment(R.layout.fragment_heroes){
                 )
             }
     }
-
+    private fun initScrollListener() {
+        binding.rvSuperHero.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager?
+                if (heroViewModel.heroModelLst.value!!.isNotEmpty() ) {
+                    var intSize = heroViewModel.heroModelLst.value!!.size -1
+                    if (linearLayoutManager != null && linearLayoutManager.findLastCompletelyVisibleItemPosition() ==
+                        intSize) {
+                        //bottom of list!
+                        binding.rvSuperHero.scrollToPosition(1)
+                        //binding.rvSuperHero.smoothScrollToPosition(0)
+                    }
+                }
+            }
+        })
+    }
 
 
 
